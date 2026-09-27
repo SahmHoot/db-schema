@@ -1,6 +1,6 @@
 # db-schema
 
-<img width="1276" height="1050" alt="dbdiagram" src="https://github.com/user-attachments/assets/abf2336f-655c-48dc-a8b3-ebc8e47d3de4" />
+<img width="1466" height="1020" alt="image" src="https://github.com/user-attachments/assets/fb5f7bf1-712b-4819-a843-46626cba2985" />
 
 # flow
 
