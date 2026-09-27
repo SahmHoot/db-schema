@@ -11,10 +11,10 @@ CREATE TABLE `users` (
 );
 
 CREATE TABLE `question_sets` (
-  `id` bigint PRIMARY KEY AUTO_INCREMENT COMMENT '문제 세트 ID',
-  `host_id` bigint NOT NULL COMMENT '문제 세트 작성자 ID',
-  `title` varchar(255) NOT NULL COMMENT '문제 세트 제목',
-  `description` text COMMENT '문제 세트 설명',
+  `id` bigint PRIMARY KEY AUTO_INCREMENT COMMENT '문제집 ID',
+  `host_id` bigint NOT NULL COMMENT '문제집 작성자 ID',
+  `title` varchar(255) NOT NULL COMMENT '문제집 제목',
+  `description` text COMMENT '문제집 설명',
   `visibility` ENUM ('PUBLIC', 'PRIVATE') NOT NULL COMMENT '공개 여부',
   `created_at` datetime NOT NULL COMMENT '생성 일시',
   `updated_at` datetime NOT NULL COMMENT '수정 일시'
@@ -22,9 +22,9 @@ CREATE TABLE `question_sets` (
 
 CREATE TABLE `questions` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT COMMENT '문항 ID',
-  `question_set_id` bigint NOT NULL COMMENT '소속 문제 세트 ID',
+  `question_set_id` bigint NOT NULL COMMENT '소속 문제집 ID',
   `type` ENUM ('MULTIPLE_CHOICE', 'TRUE_FALSE') NOT NULL COMMENT '문항 유형',
-  `content` text NOT NULL COMMENT '문제 내용',
+  `content` text NOT NULL COMMENT '문항 내용',
   `time_limit_seconds` int NOT NULL COMMENT '제한 시간(초)',
   `order_no` int NOT NULL COMMENT '문항 순서',
   `created_at` datetime NOT NULL COMMENT '생성 일시',
@@ -60,7 +60,7 @@ CREATE TABLE `room_participants` (
 CREATE TABLE `quiz_runs` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT COMMENT '퀴즈 실행 ID',
   `room_id` bigint NOT NULL COMMENT '퀴즈가 진행되는 방 ID',
-  `question_set_id` bigint NOT NULL COMMENT '사용한 문제 세트 ID',
+  `question_set_id` bigint NOT NULL COMMENT '사용한 문제집 ID',
   `status` ENUM ('READY', 'RUNNING', 'FINISHED', 'ABORTED') NOT NULL COMMENT '퀴즈 상태',
   `started_at` datetime COMMENT '퀴즈 시작 일시',
   `finished_at` datetime COMMENT '퀴즈 종료 일시'
@@ -70,7 +70,7 @@ CREATE TABLE `run_questions` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT COMMENT '실행 문항 ID',
   `quiz_run_id` bigint NOT NULL COMMENT '소속 퀴즈 실행 ID',
   `type` ENUM ('MULTIPLE_CHOICE', 'TRUE_FALSE') NOT NULL COMMENT '실행 당시 문항 유형',
-  `content` text NOT NULL COMMENT '실행 당시 문제 내용 스냅샷',
+  `content` text NOT NULL COMMENT '실행 당시 문항 내용 스냅샷',
   `time_limit_seconds` int NOT NULL COMMENT '실행 당시 제한 시간(초)',
   `order_no` int NOT NULL COMMENT '문항 진행 순서',
   `status` ENUM ('READY', 'OPEN', 'CLOSED') NOT NULL COMMENT '문항 상태',
@@ -114,9 +114,9 @@ CREATE UNIQUE INDEX `answers_index_7` ON `answers` (`run_question_id`, `particip
 
 ALTER TABLE `users` COMMENT = '교수 및 학생 사용자 계정';
 
-ALTER TABLE `question_sets` COMMENT = '호스트가 생성한 문제 세트';
+ALTER TABLE `question_sets` COMMENT = '호스트가 생성한 문제집';
 
-ALTER TABLE `questions` COMMENT = '문제 세트에 포함되는 원본 문항';
+ALTER TABLE `questions` COMMENT = '문제집에 포함되는 원본 문항';
 
 ALTER TABLE `choices` COMMENT = '원본 문항의 선택지';
 
