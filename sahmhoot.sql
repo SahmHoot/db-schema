@@ -42,6 +42,7 @@ CREATE TABLE `choices` (
 CREATE TABLE `rooms` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT COMMENT '수업방 ID',
   `host_id` bigint NOT NULL COMMENT '방을 생성한 교수 ID',
+  `title` varchar(50) NOT NULL COMMENT '수업방 제목',
   `code` varchar(6) UNIQUE NOT NULL COMMENT '6자리 입장 코드',
   `status` ENUM ('OPEN', 'PLAYING', 'CLOSED') NOT NULL COMMENT '방 상태',
   `created_at` datetime NOT NULL COMMENT '방 생성 일시',
